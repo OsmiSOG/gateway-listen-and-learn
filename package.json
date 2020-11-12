@@ -22,6 +22,7 @@
     "genius-lyrics-api": "^3.0.3",
     "jwt-simple": "^0.5.6",
     "moment": "^2.26.0",
+    "node-fetch": "^2.6.1",
     "nodemon": "^2.0.6"
   }
 }

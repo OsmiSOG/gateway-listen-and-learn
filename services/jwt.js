@@ -2,7 +2,7 @@
 
 const jwt = require('jwt-simple')
 const moment = require('moment')
-const config = require('../config')
+const config = require('../config/global')
 
 function createToken(user) {
     const payload = {
@@ -11,13 +11,13 @@ function createToken(user) {
         exp: moment().add(14,'days').unix()
     }
 
-    return jwt.encode(payload, config.SECRET_TOKEN)
+    return jwt.encode(payload, config.AppToken)
 }
 
 function decodeToken(token) {
     const decoded = new Promise((resolve, reject) => {
         try {
-            const payload = jwt.decode(token, config.SECRET_TOKEN)
+            const payload = jwt.decode(token, config.AppTokens)
             if (payload.exp <= moment().unix()){
                 reject({
                     status: 401,

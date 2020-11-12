@@ -1,14 +1,20 @@
+'use strict'
+
 const config = require('../config/global')
 const genius = require('genius-lyrics-api');
 
-const options = {
+let options = {
     apiKey: config.genius.token,
     title: 'Blinding Lights',
     artist: 'The Weeknd',
     optimizeQuery: true
 }
 
-async function testGenius(req, res) {
+async function searchSong(req, res) {
+    
+}
+
+async function getSongById(req, res) {
 
     try {
         const lyrics = await genius.getLyrics(options)
@@ -26,4 +32,4 @@ async function testGenius(req, res) {
     // );
 }
 
-module.exports = testGenius
+module.exports = {searchSong, getSongById}
