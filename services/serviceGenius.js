@@ -3,33 +3,45 @@
 const config = require('../config/global')
 const genius = require('genius-lyrics-api');
 
-let options = {
-    apiKey: config.genius.token,
-    title: 'Blinding Lights',
-    artist: 'The Weeknd',
-    optimizeQuery: true
-}
-
 async function searchSong(req, res) {
-    
+    try {
+        const nameSong = req.params.song
+        let options = {
+            apiKey: config.genius.token,
+            title: nameSong,
+            artist: '',
+            optimizeQuery: true
+        }        
+        const songs = await genius.searchSong(options)
+        res.status(200).send({
+            'message': 'Coincidencias de cancioens encontradas',
+            songs,
+            'success': true
+        })
+    } catch (error) {
+        return res.status(500).send({
+            'message':'Error al encontrar la cancion',
+            'error': error,
+            'success': false
+        })
+    }
 }
 
 async function getSongById(req, res) {
-
     try {
-        const lyrics = await genius.getLyrics(options)
-        console.log(lyrics);
-        res.status(200).send({'lyrics':lyrics})
+        const id = parseInt(req.params.id)
+        let options = {
+            apiKey: config.genius.token,
+            id,
+            title: '',
+            artist: '',
+            optimizeQuery: true
+        }
+        const song = await genius.getSongById(id, config.genius.token) 
+        res.status(200).send(song)
     } catch (error) {
         console.log(error);
     }
-    // genius.getSong(options).then((song) =>
-    //     console.log(`
-    //     ${song.id}
-    //     ${song.url}
-    //     ${song.albumArt}
-    //     ${song.lyrics}`)
-    // );
 }
 
 module.exports = {searchSong, getSongById}

@@ -14,7 +14,7 @@ lal.get('/lyrics/id/:id', lyrics.getLyricsById)
 lal.get('/lyrics/search/:search', lyrics.searchLyrics)
 lal.get('/lyrics/:page?/:limit?', lyrics.getAllLyrics)
 lal.post('/lyrics', auth, lyrics.newLyrics)
-lal.post('/genius/:song', auth, genius.searchSong)
-lal.post('/genius/:id', auth, genius.getSongById)
+lal.get('/genius/id/:id',  auth, genius.getSongById)
+lal.get('/genius/search/:song', auth, genius.searchSong)
 
 module.exports = lal
