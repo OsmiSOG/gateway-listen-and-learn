@@ -1,6 +1,5 @@
 'use strict'
 
-const { response, json } = require('express')
 const fetch = require('node-fetch')
 
 const uriBase = 'http://localhost:3000/api/'

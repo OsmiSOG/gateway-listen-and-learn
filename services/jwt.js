@@ -6,7 +6,7 @@ const config = require('../config/global')
 
 function createToken(user) {
     const payload = {
-        sub: user._id,
+        sub: user.id,
         iat: moment().unix(),
         exp: moment().add(14,'days').unix()
     }
@@ -17,7 +17,7 @@ function createToken(user) {
 function decodeToken(token) {
     const decoded = new Promise((resolve, reject) => {
         try {
-            const payload = jwt.decode(token, config.AppTokens)
+            const payload = jwt.decode(token, config.AppToken)
             if (payload.exp <= moment().unix()){
                 reject({
                     status: 401,

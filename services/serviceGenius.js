@@ -30,13 +30,6 @@ async function searchSong(req, res) {
 async function getSongById(req, res) {
     try {
         const id = parseInt(req.params.id)
-        let options = {
-            apiKey: config.genius.token,
-            id,
-            title: '',
-            artist: '',
-            optimizeQuery: true
-        }
         const song = await genius.getSongById(id, config.genius.token) 
         res.status(200).send(song)
     } catch (error) {

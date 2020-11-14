@@ -8,7 +8,7 @@ const auth = require('../middleware/auth')
 const lal = express.Router()
 
 lal.post('/login', user.loginUser)
-lal.post('/logout', user.logoutUser)
+lal.post('/logout', auth, user.logoutUser)
 lal.post('/register', user.newUser)
 lal.get('/lyrics/id/:id', lyrics.getLyricsById)
 lal.get('/lyrics/search/:search', lyrics.searchLyrics)
