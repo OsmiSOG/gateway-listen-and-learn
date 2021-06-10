@@ -1,5 +1,6 @@
 'use strict'
 
+const { response } = require('express')
 const fetch = require('node-fetch')
 
 const uriBase = 'http://localhost:3000/api/'
@@ -60,11 +61,27 @@ function newLyrics(req, res) {
     })
     .then(response => response.json())
     .then(data => {
-        res.status(200).send({lyric:data, success:true})
+        res.status(200).send({lyric:data.lyric, success:true})
     })
     .catch(error => {
         return res.status(422).send({lyric:error, success:false})
     })
 }
 
-module.exports = {getAllLyrics, getLyricsById, searchLyrics, newLyrics}
+function playLyric(req, res) {
+    fetch(`${uriBase}/play_lyrics/${req.body.id}`, {
+        method: 'post',
+        headers: {
+            'content-Type': 'application/json'
+        },
+        body: JSON.stringify({wordsAnswered:req.body.wordsAnswered})
+    })
+    .then(response => response.json())
+    .then(data => {
+        res.status(200).send({score:data, success:true})
+    }).catch(error => {
+        return res.status(422).send({score:error, success:false})
+    })
+}
+
+module.exports = {getAllLyrics, getLyricsById, searchLyrics, newLyrics, playLyric}

@@ -2,6 +2,7 @@
 
 const jwt = require('./jwt')
 const fetch = require('node-fetch')
+const { response } = require('express')
 
 const uriBase = 'http://[::1]:8000/api/'
 
@@ -90,4 +91,19 @@ function newUser(req, res) {
     })
 }
 
-module.exports = {loginUser, logoutUser, newUser}
+function languages(req, res) {
+    fetch(`${uriBase}get/languages`, {
+        method: 'GET',
+        headers: {
+            'content-Type': 'application/json'
+        }
+    }).then(response => {
+        return response.json();
+    }).then(data => {
+        return res.status(200).send({
+            languages: data, success: true
+        });
+    })
+
+}
+module.exports = {loginUser, logoutUser, newUser, languages}

@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/OsmiSOG/gateway-listen-and-learn#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "genius-lyrics-api": "^3.0.3",
     "jwt-simple": "^0.5.6",
